@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task Manager</title>
+  <style>
+    /* CSS Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .task-manager {
+      max-width: 600px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .task-form {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 8px;
+      border-radius: 4px 0 0 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="task-manager">
+    <h1>Task Manager</h1>
+    <div class="task-form">
+      <input type="text" id="taskTitle" placeholder="Task Title">
+      <input type="text" id="taskDescription" placeholder="Task Description">
+      <input type="date" id="taskDate">
+      <input type="time" id="taskTime">
+      <button onclick="addTask()">Add Task</button>
+    </div>
+    <ul id="taskList">
+      <!-- Tasks will be dynamically added here -->
+    </ul>
+  </div>
+
+  <script>
+    // JavaScript
+    function addTask() {
+      const taskTitle = document.getElementById('taskTitle');
+      const taskDescription = document.getElementById('taskDescription');
+      const taskDate = document.getElementById('taskDate');
+      const taskTime = document.getElementById('taskTime');
+      const taskList = document.getElementById('taskList');
+
+      if (taskTitle.value !== '') {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <strong>${taskTitle.value}</strong><br>
+          <em>${taskDescription.value}</em><br>
+          Date: ${taskDate.value}<br>
+          Time: ${taskTime.value}
+          <button class="delete-btn" onclick="removeTask(this)">Delete</button>
+        `;
+        taskList.appendChild(li);
+        clearFields();
+      } else {
+        alert('Please enter a task title!');
+      }
+    }
+
+    function removeTask(task) {
+      const li = task.parentElement;
+      const taskList = li.parentElement;
+      taskList.removeChild(li);
+    }
+
+    function clearFields() {
+      document.getElementById('taskTitle').value = '';
+      document.getElementById('taskDescription').value = '';
+      document.getElementById('taskDate').value = '';
+      document.getElementById('taskTime').value = '';
+    }
+  </script>
+</body>
+</html>
