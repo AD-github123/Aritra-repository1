@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <style>
+            textarea{width:169px;
+            height:20px;}
+            .button1{background-color: #1ADE7F ;
+            }
+            .box{border: 1px solid black;
+            width:230px;
+        height:180px;
+        
+    padding: 5px;}
+    .flex-container {
+    display: flex;
+    flex-direction: row;
+  }
+      @media (max-width: 1920px) {
+    .flex-container {
+      flex-direction: column;
+    }
+  }
+        </style>
+    </head>
+    <body><div class="flex-container">
+       <p>CGPA stands for "Cumulative Grade Point Average". It is measure used in education to evaluate a student's overall academic performance
+        over a certain period, usually an entire course or program. Now while filling the application forms of various companies, many times we need 
+        to fill the percentage achieved in the course because there are many companies who accept percentage rather than CGPA. Everyone does not know the process of converting CGPA to percentage.
+        This CGPA to percentage calculator will deffinitely help to easily calculate the percentage of the respective CGPA.</p>
+     <center> <div class="box"><p> Grading scale:<select id="grade">
+            <option value="4">4.0 grading scale</option>
+            <option value="5">5.0 grading scale</option>
+            <option value="10">10.0 grading scale</option></select></p>
+      <p>      CGPA:<br><input type="text" id="cgpa" placeholder="enter CGPA">
+<input class="button1" type="button" value="calculate" onclick="show()"></p>
+Percentage:<br>
+       <textarea id="result"></textarea></div></center></div>
+        <script>
+            function show(){
+            const x=parseFloat(document.getElementById("grade").value);
+            const y=parseFloat(document.getElementById("cgpa").value);
+            let z;
+          if (x === 4){
+            z=y*25;
+          }else if (x === 5){
+            z=y*20;
+          }else if (x === 10){
+            z=y*10;
+          }else{
+            alert("invalid scale");
+          }
+          document.getElementById("result").innerHTML=z;
+        }
+        </script>
+    </body>
+</html>
