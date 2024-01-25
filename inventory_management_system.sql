@@ -1,7 +1,49 @@
+create database inventory_management_system;
 use inventory_management_system;
-select * from products;
-select * from suppliers;
+create table products(ProductID int primary key,ProductName varchar(100),Category varchar(100), UnitPrice int, QuantityInStock int);
+insert into products(ProductID,ProductName,Category,UnitPrice,quantityInStock) 
+values
+(1, 'Laptop', 'Electronics', 800, 50),
+(2, 'OfficeChair', 'Furniture', 150, 100),
+(3, 'Printer','Electronics', 200, 300),
+(4, 'Notebook', 'Stationery',5,200),
+(5,'SmartPhone','Electronics',600,80),
+(6,'Desk','Furniture',120,50),
+(7,'HeadPhone','Electronics',50,80),
+(8,'Pen','Staionery',1,500),
+(9,'BookShelf','Furniture',250,20),
+(10,'Mouse','Electronics',200,100);
+create table suppliers(SupplierID int primary key, SupplierName varchar(100),ContactPerson varchar(100),PhoneNO varchar(10));
+insert into suppliers (SupplierID, SupplierName, ContactPerson, PhoneNO)
+values
+(101, 'Tech Suppliers','John Doe','1234567890'),
+(102, 'Furniture Mart', 'Jane Smith', '9876543210'),
+(103,'Stationery World','Mark Johnson','5551234567'),
+(104, 'Electronics World','Sarah Brown','1112223333'),
+(105, 'Office Solutions','James White','4445556666'),
+(106, 'Bookstore Central', 'Emma Wilson','7778889999'),
+(107,'Home Furnishings', 'Michael Green', '9990001111'),
+(108, 'Writing Essentials', 'Laura Davis', '2223334444'),
+(109, 'Electronics Direct', 'Chris Turner', '6667778888'),
+(110, 'Furniture Express','Alex Johnson', '3334445555');
+create table orders(OrderID int primary key, ProductID int, SupplierID int, OrderDate date, QuantityOrdered int, OrderAmount int, 
+foreign key(ProductID) references products(ProductID),
+foreign key(SupplierID) references suppliers(SupplierID));
+insert into orders (OrderID, ProductID, SupplierID, OrderDate, QuantityOrdered, OrderAmount)
+values
+(501, 1, 101, '2023-12-12', 10, 8000),
+(502, 2, 102, '2024-01-05', 20, 3000),
+(503, 3, 103, '2024-01-10', 5, 1000),
+(504, 4, 104, '2023-12-01', 50, 250),
+(505, 5, 105, '2023-12-20', 15, 9000),
+(506, 6, 106, '2023-12-17', 8, 960),
+(507, 7, 107, '2024-01-09', 25, 1250),
+(508, 8, 108, '2024-01-03', 100, 100),
+(509, 9, 109, '2023-12-02', 2, 500),
+(510, 10, 110, '2024-01-05', 30, 600);
 select * from orders;
+select*from products;
+select * from suppliers;
 /*performing analyisis on "products" table*/
 
 /*finding total quantity in sotck*/
@@ -173,11 +215,3 @@ select round(((sum(case when month(OrderDate)=12 then OrderAmount else 0 end)-
 sum(case when month(OrderDate)=1 then OrderAmount else 0 end))/sum(case when month(OrderDate)=1 then OrderAmount else 0 end))*100,2)
  as decrease_in_order
 from orders;
-
-
-
-
-
-
-
-
